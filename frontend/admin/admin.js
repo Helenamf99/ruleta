@@ -40,24 +40,34 @@ async function cargarUsuarios() {
 
 
 async function eliminarUsuario(id, email) {
-    if (confirm(`¿Seguro que quieres eliminar al usuario con ID ${id}?`)) {
+    if (!confirm(`¿Seguro que quieres eliminar al usuario con ID ${id}?`))return;
+
+    const tokeAdmin = localStorage.getItem("tokenSesion");
         try {
             const respuesta = await fetch(`http://172.17.29.34/usuarios/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': tokeAdmin,
+                    'Content-Type':'aplication/json'
+                }
             });
 
             if (respuesta.ok) {
                 alert("Usuario eliminado correctamente. Se enviará un correo de notificación.");
                 cargarUsuarios(); 
             }
+            if (respuesta.status ===403){
+                alert("Petición denegada. No tienes permisos de adminsitrador.");
+                return;
+            }
         } catch (error) {
-            console.error("Error al eliminar:", error);
+            console.error("Error en la petición:", error);
         }
     }
-}
+
 
 async function modificarNombre(id, email) {
-    const nuevoNombre = prompt("Introduce el nuevo nombre sustituto. ):");
+    const nuevoNombre = prompt("Introduce el nuevo nuevo nombre para el usuario. ):");
     if (!nuevoNombre) return;
 
     try {
