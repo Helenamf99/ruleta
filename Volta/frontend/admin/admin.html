@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración - VOLTA</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="admin.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Panel de Control del Administrador</h1>
+        <h1>HOLA PROBANDO</h1>
+        <button onclick="window.location.href='index.html'">Volver al Juego</button>
+    </header>
+
+    <div class="tabs-container">
+        <button class="tabBtn active" onclick="openTab(event, 'usuarios')">Usuarios</button>
+        <button class="tabBtn" onclick="openTab(event, 'rankings')">Rankings</button>
+        <button class="tabBtn" onclick="openTab(event, 'preguntas')">Preguntas</button>
+    </div>
+
+    <main>
+        
+        <section id="usuarios" class="tab-content active-content">
+            <h2>Gestión de Usuarios</h2>
+            <table id="tabla-usuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre de Usuario</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-usuarios">
+                    
+                </tbody>
+            </table>
+        </section>
+
+        <section id="rankings" class="tab-content">
+            <h2>Historial de Rankings</h2>
+            <ul id="lista-rankings"></ul>
+        </section>
+
+        <section id="preguntas" class="tab-content">
+            <h2>Banco de Preguntas</h2>
+            <ul id="lista-preguntas"></ul>
+        </section>
+    </main>
+</body>
+</html>
