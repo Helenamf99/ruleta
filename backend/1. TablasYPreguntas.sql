@@ -1,6 +1,6 @@
-create database abp;
-use abp;
-select * from preguntas;
+DROP DATABASE IF EXISTS ABP;
+CREATE DATABASE ABP;
+USE ABP;
 
 DROP TABLE IF EXISTS partidas;
 DROP TABLE IF EXISTS usuarios;
