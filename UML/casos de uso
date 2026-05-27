@@ -1,0 +1,41 @@
+@startuml casos de uso
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Usuario / Jugador" as User
+actor "Administrador" as Admin
+
+' Herencia de actores: El Admin también puede hacer lo del usuario '
+Admin --|> User
+
+rectangle "Sistema VOLTA (Web)" {
+    
+    ' Casos de Uso del Jugador '
+    usecase "Registrarse / Iniciar Sesión" as UC_Login
+    usecase "Jugar Partida (Ver Rosco)" as UC_Jugar
+    usecase "Girar Ruleta" as UC_Ruleta
+    usecase "Responder Pregunta" as UC_Pregunta
+    usecase "Recibir Efecto Comodín" as UC_Comodin
+    
+    ' Casos de Uso del Admin '
+    usecase "Ver Panel de Administración" as UC_Panel
+    usecase "Ver Ranking de Usuarios" as UC_Ranking
+    usecase "Gestionar Usuarios (Modificar/Eliminar)" as UC_GestUsuarios
+    usecase "Gestionar Preguntas y Respuestas" as UC_GestPreguntas
+
+    ' Relaciones de Inclusión (<<include>>) '
+    UC_Jugar ..> UC_Ruleta : <<include>>
+    UC_Ruleta ..> UC_Pregunta : <<include>> (si cae categoría)
+    UC_Ruleta ..> UC_Comodin : <<include>> (si cae comodín)
+}
+
+' Conexiones de los Actores con los Casos de Uso '
+User --> UC_Login
+User --> UC_Jugar
+
+Admin --> UC_Panel
+Admin --> UC_Ranking
+Admin --> UC_GestUsuarios
+Admin --> UC_GestPreguntas
+
+@endum
