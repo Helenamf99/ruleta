@@ -1,0 +1,77 @@
+@startuml entity
+skinparam classAttributeIconSize 0
+
+enum Rol {
+    USER
+    ADMIN
+}
+
+enum EstadoLetra {
+    PENDIENTE
+    ACERTADA
+    FALLADA
+}
+
+enum Categoria {
+    HISTORIA
+    GEOGRAFIA
+    MUSICA
+    INFORMATICA
+    DEPORTES
+    ENTRETENIMIENTO
+}
+
+enum TipoComodin {
+    BUENO
+    MALO
+}
+
+class Usuario {
+    - id: Long
+    - username: String
+    - password: String
+    - email: String
+    - rol: Rol
+}
+
+class Partida {
+    - id: Long
+    - tiempoTotal: Double
+    - fecha: Date
+    - completada: Boolean
+    - usuario: Usuario
+}
+
+class Rosco {
+    - id: Long
+    - partida: Partida
+}
+
+class Letra {
+    - id: Long
+    - caracter: Char
+    - estado: EstadoLetra
+    - rosco: Rosco
+}
+
+class Pregunta {
+    - id: Long
+    - categoria: Categoria
+    - enunciado: String
+    - respuestaCorrecta: String
+}
+
+class Comodin {
+    - id: Long
+    - tipo: TipoComodin
+    - valorTiempo: Double
+}
+
+' Relaciones de la Capa de Entidades '
+Usuario "1" -- "0..*" Partida : tiene >
+Partida "1" *-- "1" Rosco : posee >
+Rosco "1" *-- "26" Letra : contiene >
+
+Pregunta "0..*" --> "1" Categoria : clasificada en
+Comodin "0..*" --> "1" TipoComodin : define tipo
+@endum
