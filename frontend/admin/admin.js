@@ -15,7 +15,7 @@ if (tabName === 'preguntas') cargarPreguntas();
 
 async function cargarUsuarios() {
     try {
-        const respuesta = await fetch('http://172.17.29.34/usuarios/');
+        const respuesta = await fetch('http://localhost/usuarios/');
         const usuarios = await respuesta.json();
         const tbody = document.getElementById('lista-usuarios');
         tbody.innerHTML = ''; 
@@ -44,7 +44,7 @@ async function eliminarUsuario(id, email) {
 
     const tokeAdmin = localStorage.getItem("tokenSesion");
         try {
-            const respuesta = await fetch(`http://172.17.29.34/usuarios/${id}`, {
+            const respuesta = await fetch(`http://localhost/usuarios/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': tokeAdmin,
@@ -71,7 +71,7 @@ async function modificarNombre(id, email) {
     if (!nuevoNombre) return;
 
     try {
-        const respuesta = await fetch(`http://172.17.29.34/usuarios/${id}`, {
+        const respuesta = await fetch(`http://localhost/usuarios/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/center-json' || 'application/json' },
             body: JSON.stringify({ username: nuevoNombre })
