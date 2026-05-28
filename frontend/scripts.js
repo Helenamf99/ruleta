@@ -126,9 +126,6 @@ function ocultarMensaje() {
 }
 
 
-// ==========================================================================
-// 3. ENTRADA Y SALIDA DE DATOS REALES CON TU BACKEND (FETCH)
-// ==========================================================================
 async function manejarLogin(e) {
     e.preventDefault();
     ocultarMensaje();
@@ -146,23 +143,20 @@ async function manejarLogin(e) {
         const datos = await respuesta.json();
 
         if (respuesta.ok) {
-            // Guardamos los datos esenciales en el almacenamiento local
             localStorage.setItem('usuarioId', datos.id);
             localStorage.setItem('username', datos.username);
-            localStorage.setItem('isAdmin', datos.isAdmin); // Guardamos si es admin o no
+            localStorage.setItem('isAdmin', datos.isAdmin);
 
-            // 🚀 DETECTOR DE ROL: Evaluamos si es Administrador o Jugador estándar
             if (datos.isAdmin === true || datos.isAdmin === "true") {
                 lanzarMensaje(`¡Bienvenido Administrador ${datos.username}! Accediendo al panel...`, 'exito');
                 
                 setTimeout(() => { 
                     cerrarModalAuth(); 
-                    // Redirige directo a la pantalla de gestión del admin
+               
                     window.location.href = 'admin/admin.html'; 
                 }, 1500);
 
             } else {
-                // Comportamiento normal para jugadores estándar
                 lanzarMensaje(`¡Bienvenido, ${datos.username}!`, 'exito');
                 
                 if (btnAbrirModalAuth) {
@@ -238,10 +232,6 @@ async function manejarSolicitudRecuperacion(e) {
     }
 }
 
-
-// ==========================================================================
-// 4. LÓGICA EXCLUSIVA PARA LA PÁGINA RESTABLECER.HTML
-// ==========================================================================
 const formRestablecer = document.getElementById('form-restablecer');
 if (formRestablecer) {
     
@@ -267,7 +257,6 @@ if (formRestablecer) {
             return;
         }
 
-        // 2. Validación de fuerza
         const regexPassword = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
         if (!regexPassword.test(p1)) {
             msgDiv.textContent = "Debe tener mínimo 8 caracteres, una mayúscula y un carácter especial.";
@@ -276,7 +265,6 @@ if (formRestablecer) {
             return;
         }
 
-        // 3. Envío de datos a la API de Java
         try {
             const res = await fetch(`${API_BASE_URL}/restablecer-password`, {
                 method: 'POST',
