@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña - Volta</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body class="restablecer-body">
+
+    <div class="restablecer-wrapper">
+        <div id="auth-container" class="restablecer-container">
+            
+            <form id="form-restablecer" class="auth-form">
+                <h2>Nueva Contraseña</h2>
+                <p class="restablecer-subtitulo">
+                    Establece tu nueva contraseña de acceso.
+                </p>
+                
+                <input type="password" id="pass1" placeholder="Crear nueva contraseña" required>
+                <input type="password" id="pass2" placeholder="Repetir nueva contraseña" required>
+                
+                <button type="submit">Cambiar Contraseña</button>
+            </form>
+            
+            <div id="auth-mensaje" class="mensaje restablecer-mensaje"></div>
+        </div>
+    </div>
+
+    <script src="scripts.js" defer></script>
+</body>
+</html>
