@@ -1,0 +1,428 @@
+:root {
+  --color-primary: #ed2ea5;       /* Rosa neon */
+  --color-primary-hover: #2c0d2a; /* Bordo oscuro */
+  --color-secondary: #852467;     /* Violeta */
+  --color-bg: #fd8083;            /* Naranja */
+  --color-surface: #ee227d;       /* Rosa oscuro neon */
+  --color-text-main: #498099;     /* Celeste neon */
+  --color-text-muted: #30c0b7;    /* Celeste neon brillante */
+  --verde-neon: #00ff87;
+  --primary: #00f2fe;             /* Aseguramos fallback para la variable rápida */
+}
+
+body {
+    background-color: #0d0d1a; 
+    color: #fff;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Marcador Superior */
+.hud {
+  display: flex;
+  gap: 40px;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-color: var(--color-primary-hover);
+  border-radius: 10px;
+  padding: 10px 30px;
+  justify-content: center;
+  width: auto;
+}
+
+.hud span {
+  color: var(--color-primary);
+  text-shadow: 0 0 10px var(--color-primary);
+}
+
+/* Contenedor del Rosco Circular */
+.rosco-container {
+  position: relative;
+  width: 650px;
+  height: 650px;
+  margin: 40px auto;
+}
+
+.letra-rosco {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  background: #1a1a3a;
+  color: rgba(255, 255, 255, 0.4);
+  /* Translúcido por defecto */
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+/* Estados de las letras con luces neón */
+.letra-rosco.activa {
+  color: var(--color-primary);
+  cursor: pointer;
+  background: #2b2b66;
+  border-color: var(--primary, #00f2fe);
+  box-shadow: 0 0 15px var(--primary, #00f2fe);
+}
+
+.letra-rosco.correcta {
+  background: var(--verde-neon);
+  color: #000;
+  border-color: #00ff87;
+  box-shadow: 0 0 15px #00ff87;
+}
+
+.letra-rosco.incorrecta {
+  background: var(--color-surface);
+  color: #fff;
+  border-color: #fe0851;
+  box-shadow: 0 0 15px #fe0851;
+}
+
+.letra-rosco.volta {
+  background: #ffde00;
+  color: #000;
+  border-color: #ffde00;
+  box-shadow: 0 0 15px #ffde00;
+}
+
+/* Pantalla de Cuenta Regresiva Gigante */
+#countdown-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(13, 13, 26, 0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  text-shadow: 0 0 30px var(--primary);
+  z-index: 2000;
+}
+
+/* Ruleta Giratoria Simple en CSS */
+.ruleta-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ruleta-visual {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px dashed var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 10px;
+  transition: transform 2s cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+.girando {
+  animation: spin 0.2s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Barra de progreso de tiempo del modal (15s) */
+.timer-bar-container {
+  width: 100%;
+  height: 6px;
+  background: #222;
+  margin-top: 15px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.timer-bar {
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 1s linear;
+}
+
+/* ==========================================================================
+        ESTILOS DE LOS MODALES DE JUEGO (Centrados Absolutos)
+        ========================================================================== */
+.game-modal-overlay {
+  display: none;
+  /* Controlado por JS (flex) */
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13, 13, 26, 0.85);
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+}
+
+.game-modal-content {
+  background-color: #1a0826;
+  padding: 35px;
+  border: 2px solid var(--primary, #00f2fe);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 0 30px var(--primary, #00f2fe);
+  text-align: center;
+  animation: modalAparecer 0.3s ease-out;
+}
+
+@keyframes modalAparecer {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Estructura específica para el diseño de la Ruleta */
+.modal-ruleta-layout {
+  max-width: 550px;
+}
+
+.ruleta-container {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: 25px auto;
+}
+
+/* El disco que girará físicamente */
+.ruleta-disco {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid #00f3ff;
+  box-shadow: 0 0 20px #00f3ff;
+  position: relative;
+  overflow: hidden;
+  transition: transform 4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* LA CAPA DE LA IMAGEN */
+.ruleta-disco::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Carga de imagen */
+  background-image: url('imagenes/Rosco.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  transform: rotate(-158.5deg); 
+  z-index: 1;
+}
+
+/* Flecha indicadora superior */
+.ruleta-flecha {
+  position: absolute;
+  top: -15px;
+  left: 50%;  
+  transform: translateX(-50%) rotate(180deg); 
+  font-size: 2rem;
+  color: var(--color-primary);
+  text-shadow: 0 0 10px #00f3ff;
+  z-index: 10;
+}
+
+/* Simulación de sectores radiales rápidos en CSS */
+.sector {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 3px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transform-origin: 50% 50%;
+  color: #fff;
+}
+
+/* Distribución de las 8 opciones */
+.sector:nth-child(1) { transform: rotate(0deg); color: #00f3ff; }
+.sector:nth-child(2) { transform: rotate(45deg); color: #30c0b7; }
+.sector:nth-child(3) { transform: rotate(90deg); color: #ffbe00; }
+.sector:nth-child(4) { transform: rotate(135deg); color: #b624ff; }
+.sector:nth-child(5) { transform: rotate(180deg); color: #ff007f; }
+.sector:nth-child(6) { transform: rotate(225deg); color: #00ff87; }
+.sector:nth-child(7) { transform: rotate(270deg); color: #ff3333; }
+.sector:nth-child(8) { transform: rotate(315deg); color: #00ff87; }
+
+/* Resaltado de la categoría ganadora */
+.sector.ganador-iluminado {
+  font-size: 0.95rem;
+  text-shadow: 0 0 15px currentColor;
+  transition: all 0.2s ease;
+}
+
+/* Botón de acción Gaming */
+.btn-game-neon {
+  background: var(--color-surface);
+  color: #000;
+  border: none;
+  padding: 12px 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--primary, #00f2fe);
+  transition: all 0.3s ease;
+}
+
+.btn-game-neon:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 25px #fff;
+}
+
+#bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES - REESCALADO MATEMÁTICO DEL ROSCO MEDIANTE TRANSFORM
+   ========================================================================== */
+
+/* Ajustes para tablets o pantallas medianas */
+@media (max-width: 768px) {
+  .hud {
+    font-size: 1.1rem;
+    gap: 20px;
+    padding: 8px 15px;
+    letter-spacing: 1px;
+  }
+
+  /* Dejamos las dimensiones en 650px para engañar al JS, pero lo encogemos visualmente */
+  .rosco-container {
+    margin: 10px auto;
+    transform: scale(0.65); /* Escala al 65% de su tamaño */
+    transform-origin: top center; /* Evita que deje huecos vacíos arriba */
+    height: 425px; /* Ajuste de altura compensatorio para el flujo de la página */
+  }
+
+  #countdown-screen {
+    font-size: 4rem;
+  }
+
+  .ruleta-container {
+    width: 240px;
+    height: 240px;
+    margin: 15px auto;
+  }
+
+  .game-modal-content {
+    padding: 20px 15px;
+  }
+}
+
+/* Ajuste perfecto para pantallas de Móviles (Como tu iPhone 13 Pro) */
+@media (max-width: 480px) {
+  .game-container {
+    padding: 10px;
+  }
+
+  .hud {
+    font-size: 0.9rem;
+    gap: 12px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 360px;
+    justify-content: space-around;
+    margin-bottom: 15px;
+  }
+
+  /* EL TRUCO MAESTRO: El JS posicionará las letras sobre 650px, 
+     pero el iPhone lo renderizará escalado perfectamente a la pantalla táctil */
+  .rosco-container {
+    width: 650px;  /* Mantenemos el tamaño original para que el JS calcule bien */
+    height: 650px; /* Mantenemos el tamaño original para que el JS calcule bien */
+    margin: 0 auto;
+    transform: scale(0.52); /* Reducción exacta para pantallas de ~390px de ancho */
+    transform-origin: top center;
+    margin-bottom: -280px; /* Margen negativo para absorber el espacio flotante del reescalado */
+  }
+
+  /* Las letras mantienen sus estilos nativos perfectos de neón y tamaño */
+  .letra-rosco {
+    font-size: 1.4rem;
+  }
+
+  /* Modales y elementos de interfaz adaptados debajo del rosco */
+  .game-modal-content {
+    width: 95%;
+    padding: 20px 15px;
+  }
+
+  .ruleta-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .btn-game-neon {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+/* Soporte para móviles extremadamente estrechos o compactos */
+@media (max-width: 360px) {
+  .rosco-container {
+    transform: scale(0.45);
+    margin-bottom: -320px;
+  }
+}

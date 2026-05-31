@@ -1,0 +1,632 @@
+:root {
+  --color-primary: #ed2ea5;
+  --color-primary-hover: #2c0d2a;
+  --color-secondary: #852467;
+  --color-bg: #f37477;
+  --color-surface: #ee227d;
+  --color-text-main: #498099;
+  --color-text-muted: #30c0b7;
+}
+ 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+body {
+  font-family: 'Orbitron', sans-serif;
+  background-color: var(--color-primary-hover);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+ 
+header {
+  width: auto;
+  text-align: center;
+  padding: 2%;
+  background: linear-gradient(
+    180deg,
+    rgba(150, 30, 104, 0.5) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+ 
+.logo-neon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Monoton', cursive;
+  font-size: 8rem; /* Se adaptará dinámicamente en pantallas pequeñas abajo */
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #d400ff,
+    0 0 20px #2f00ff,
+    0 0 40px #f700ff;
+}
+ 
+.ruleta-icono {
+  height: 1.3em;
+  width: auto;
+  margin-left: -20px;
+  margin-right: -20px;
+  filter: drop-shadow(0 0 8px rgba(0, 243, 255, 0.8));
+  animation: girar 10s linear infinite;
+}
+ 
+/* cuidado!!!! NO TOQUEIS ESTO PORQUE SINO NO GIRARÁ LA RULETA DEL TITULO */
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+ 
+.subtitle {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.8rem;
+  margin-top: 10px;
+}
+ 
+#menu-juego ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap; /* Permite que los botones bajen si no caben juntos */
+}
+ 
+#menu-juego a {
+  text-decoration: none;
+  padding: 12px 25px;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 1rem;
+  display: inline-block;
+  text-align: center;
+}
+ 
+.btn-jugar {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 0 25px #0099ff;
+}
+ 
+.btn-jugar:hover {
+  background-color: #00fafae5;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0 25px #ff00f2;
+  transform: translateY(-2px);
+}
+ 
+.btn-ranking {
+  border: 2px solid var(--color-text-muted);
+  color: var(--color-text-muted);
+  box-shadow: 0 0 25px #ff00ff;
+}
+ 
+.btn-ranking:hover {
+  background-color: 2px solid var(--color-text-muted);
+  color: rgb(234, 0, 255);
+  box-shadow: 0 0 25px #00ffd5;
+  transform: translateY(-2px);
+}
+ 
+main {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  min-height: 60vh;  
+  overflow: hidden;  
+  padding: 40px 20px;
+}
+ 
+.video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 1;
+  object-fit: cover;
+  pointer-events: none;
+}
+ 
+.main-content {
+  position: relative;
+  z-index: 2;
+  max-width: 40%; /* Escritorios grandes */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background-color: rgba(133, 36, 103, 0.75);
+}
+ 
+#descripcion, #preview-ranking {
+  background-color: rgba(133, 36, 103, 0.15);
+  border: 1px solid var(--color-secondary);
+  padding: 30px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 15px rgba(133, 36, 103, 0.2);
+}
+ 
+h2,
+h3 {
+  font-size: 1.5rem;
+  color: var(--color-bg);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.979);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+ 
+#descripcion p {
+  color: #e2e8f0;
+  text-align: justify;
+  text-shadow: 2px 2px 8px rgb(0, 0, 0);
+  line-height: 1.8;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+ 
+.segundosPos {
+  color: #2bff00;
+}
+ 
+.segundosNeg {
+  color: #fd1616;
+}
+ 
+.pasos {
+  color: var(--color-bg);
+  text-shadow: 2px 2px 8px rgba(38, 0, 255, 0.979);
+  font-size: 1.2rem;
+}
+ 
+.pasos-juego {
+  margin: 25px 0;
+  background-color: rgba(0, 0, 0, 0.486);
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid var(--color-primary);
+}
+ 
+.pasos-juego ul {
+  list-style: none;
+}
+ 
+.pasos-juego li {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+ 
+#preview-ranking ol {
+  padding-left: 20px;
+  color: var(--color-text-muted);
+}
+ 
+#preview-ranking li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+ 
+.restablecer-body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #1a001a;
+}
+ 
+.restablecer-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 20px;
+}
+ 
+.restablecer-container {
+    width: 100%;
+    max-width: 450px;
+    background-color: #0b010b;        
+    border: 2px solid #ff007f;          
+    border-radius: 12px;                
+    padding: 35px 25px;                  
+    box-sizing: border-box;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.4),
+                inset 0 0 10px rgba(255, 0, 127, 0.2);
+}
+ 
+.restablecer-subtitulo {
+    font-size: 14px;
+    margin-bottom: 25px;
+    color: #cccccc;
+    text-align: center;
+    line-height: 1.4;
+}
+ 
+.restablecer-mensaje {
+    display: none;
+    margin-top: 15px;
+    text-align: center;
+}
+ 
+footer {
+  width: 100%;
+  background-color: var(--color-secondary);
+  color: var(--color-primary-hover);
+  margin-top: auto;
+}
+ 
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+ 
+.footer-section h4 {
+  color: var(--color-primary-hover);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+ 
+.footer-section p {
+  font-size: 1rem;
+  color: #ffffff;
+}
+ 
+.footer-bottom {
+  color: #00f3ff;
+  text-align: center;
+  padding-bottom: 30px;
+  font-size: 1.3rem;
+}
+ 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+}
+ 
+.modal-content {
+    background-color: #1a0826;
+    padding: 30px;
+    border: 2px solid #00f3ff;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+    text-align: center;
+}
+ 
+.close-modal {
+    color: #ff007f;
+    position: absolute;
+    top: 2px;
+    right: 9px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-shadow: 0 0 5px #ff007f;
+}
+ 
+.close-modal:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f;
+}
+ 
+#preview-ranking h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    text-shadow: 0 0 8px #00f3ff;
+}
+ 
+#preview-ranking ol {
+    list-style: none;
+    padding: 0;
+}
+ 
+#preview-ranking li {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 15px 0;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+ 
+#preview-ranking .position {
+    color: #00f3ff;
+    font-weight: bold;
+}
+ 
+#preview-ranking .pts {
+    color: #ff007f;
+}
+ 
+#preview-ranking {
+    display: none;
+}
+ 
+.modal-content #preview-ranking {
+    display: block;
+}
+ 
+#modal-auth.modal {
+  display: none;
+  position: fixed;
+  z-index: 1100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 13, 42, 0.85);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+}
+ 
+#modal-auth .modal-content {
+  background-color: rgba(133, 36, 103, 0.95);
+  padding: 35px;
+  border: 2px solid var(--color-primary);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+  position: relative;
+  box-shadow: 0 0 25px var(--color-primary), inset 0 0 15px rgba(237, 46, 165, 0.3);
+  text-align: left;
+}
+ 
+#modal-auth .btn-cerrar {
+  color: var(--color-text-muted);
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px var(--color-text-muted);
+}
+ 
+#modal-auth .btn-cerrar:hover {
+  color: #fff;
+  text-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-primary);
+  transform: scale(1.1);
+}
+ 
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+ 
+.auth-form h2 {
+  color: #fff;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px var(--color-primary);
+}
+ 
+.auth-form input {
+  background-color: var(--color-primary-hover);
+  border: 1px solid var(--color-secondary);
+  padding: 14px;
+  color: #fff;
+  border-radius: 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+ 
+.auth-form input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary);
+  outline: none;
+  background-color: rgba(44, 13, 42, 0.5);
+}
+ 
+.auth-form input::placeholder {
+  color: rgba(48, 192, 183, 0.6);
+}
+ 
+.auth-form button {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px var(--color-primary);
+}
+ 
+.auth-form button:hover {
+  background-color: #fff;
+  color: var(--color-primary);
+  box-shadow: 0 0 25px #fff;
+  transform: translateY(-2px);
+}
+ 
+.auth-form p {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+}
+ 
+.auth-form a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: bold;
+  transition: text-shadow 0.2s ease;
+}
+ 
+.auth-form a:hover {
+  text-shadow: 0 0 8px var(--color-text-muted);
+}
+ 
+#modal-auth .mensaje {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+ 
+#modal-auth .mensaje.error {
+  background-color: rgba(253, 128, 131, 0.2);
+  color: var(--color-bg); /* Naranja */
+  border: 1px solid var(--color-bg);
+  text-shadow: 0 0 5px var(--color-bg);
+}
+ 
+#modal-auth .mensaje.exito {
+  background-color: rgba(48, 192, 183, 0.2);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-text-muted);
+  text-shadow: 0 0 8px var(--color-text-muted);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES - SECCIÓN RESPONSIVE EXCLUSIVA PARA MÓVILES Y TABLETS
+   ========================================================================== */
+
+/* Ajustes para pantallas medianas (Tablets u ordenadores pequeños) */
+@media (max-width: 1024px) {
+  .main-content {
+    max-width: 70%; /* Amplía el contenedor central para aprovechar espacio */
+  }
+}
+
+/* Ajustes críticos para móviles (Pantallas de teléfonos) */
+@media (max-width: 768px) {
+  .logo-neon {
+    font-size: 3.5rem; /* Reduce el tamaño gigantesco de 8rem para evitar scroll lateral */
+    letter-spacing: 0px;
+  }
+
+  .ruleta-icono {
+    height: 1.1em; /* Ajusta sutilmente la ruleta giratoria del título */
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .subtitle {
+    font-size: 1.1rem; /* Subtítulo legible pero más compacto */
+    letter-spacing: 1px;
+  }
+
+  #menu-juego ul {
+    flex-direction: column; /* Apila los botones (Jugar y Clasificación) uno debajo del otro */
+    gap: 15px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  #menu-juego a {
+    width: 100%; /* Los botones ocupan todo el ancho disponible para facilitar pulsar con el dedo */
+    font-size: 1.1rem;
+    padding: 14px 20px;
+  }
+
+  .main-content {
+    max-width: 95%; /* Toma casi toda la pantalla del móvil para que el texto sea grande */
+    gap: 20px;
+  }
+
+  #descripcion, #preview-ranking {
+    padding: 20px 15px; /* Reduce márgenes internos pesados */
+    margin: 10px;
+  }
+
+  h2, h3 {
+    font-size: 1.3rem; /* Encabezados acordes al tamaño móvil */
+  }
+
+  #descripcion p, .pasos, .pasos-juego li {
+    font-size: 1rem; /* El tamaño de texto perfecto y estándar para smartphones */
+    line-height: 1.6;
+  }
+
+  .footer-content {
+    flex-direction: column; /* El pie de página se apila verticalmente */
+    text-align: center;
+    gap: 25px;
+  }
+
+  .footer-bottom {
+    font-size: 1rem;
+  }
+
+  /* Modales de Login / Registro adaptados al tacto */
+  #modal-auth .modal-content, .modal-content {
+    width: 92%;
+    padding: 25px 15px;
+  }
+
+  .auth-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-form input, .auth-form button {
+    padding: 12px;
+    font-size: 0.95rem; /* Inputs grandes fáciles de rellenar en el móvil */
+  }
+}
+
+/* Teléfonos muy pequeños (iPhone SE antiguos, etc.) */
+@media (max-width: 380px) {
+  .logo-neon {
+    font-size: 2.8rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+  }
+}
