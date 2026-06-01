@@ -1,10 +1,8 @@
 if (typeof API_BASE_URL === "undefined") {
   window.API_BASE_URL = "https://limpness-stress-front.ngrok-free.dev";
 }
- 
-// ==========================================================================
-// 1. MANEJO DE PESTAÑAS (TABS) DEL PANEL
-// ==========================================================================
+
+// Esto sirve para manejarte entre las tres pestañas 
 function openTab(evt, tabName) {
   const contents = document.querySelectorAll(".tab-content");
   contents.forEach((content) => content.classList.remove("active-content"));
@@ -21,9 +19,6 @@ function openTab(evt, tabName) {
   if (tabName === "preguntas") cargarPreguntas();
 }
  
-// ==========================================================================
-// 2. CONTROLADOR DE VISTAS Y PETICIONES (ADMINISTRACIÓN RECONECTADA)
-// ==========================================================================
 async function cargarUsuarios() {
   const tbody = document.getElementById("lista-usuarios");
   if (!tbody) return;
@@ -133,7 +128,7 @@ async function cargarRankings() {
     lista.innerHTML = "";
  
     if (ranking.length === 0) {
-      lista.innerHTML = "<li>🏆 Aún no hay partidas registradas en el ranking.</li>";
+      lista.innerHTML = "<li> Aún no hay partidas registradas en el ranking.</li>";
       return;
     }
  
@@ -151,7 +146,7 @@ async function cargarRankings() {
     });
   } catch (error) {
     console.error("Error al cargar el ranking:", error);
-    lista.innerHTML = '<li style="color: red;">❌ Error al conectar con el servidor de rankings.</li>';
+    lista.innerHTML = '<li style="color: red;"> Error al conectar con el servidor de rankings.</li>';
   }
 }
  
@@ -172,7 +167,7 @@ async function cargarPreguntas() {
     lista.innerHTML = "";
  
     if (preguntas.length === 0) {
-      lista.innerHTML = "<li>📝 El banco de preguntas está vacío en la base de datos.</li>";
+      lista.innerHTML = "<li> El banco de preguntas está vacío en la base de datos.</li>";
       return;
     }
  
@@ -197,6 +192,6 @@ async function cargarPreguntas() {
     });
   } catch (error) {
     console.error("Error al cargar las preguntas:", error);
-    lista.innerHTML = '<li style="color: red; list-style: none;">❌ Error al conectar con el banco de preguntas o mapear sus propiedades.</li>';
+    lista.innerHTML = '<li style="color: red; list-style: none;"> Error al conectar con el banco de preguntas o mapear sus propiedades.</li>';
   }
 }

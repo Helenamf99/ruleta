@@ -14,9 +14,9 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cat") // <- Apunta a la columna real de tu compañero
-    private Integer id;      // <- Se llama 'id' para que tu repositorio funcione perfectamente
+    @Column(name = "id_cat")
+    private Integer id;
 
-    @Column(name = "nombre_cat", nullable = false, unique = true) // <- Apunta al nombre real
+    @Column(name = "nombre_cat", nullable = false, unique = true)
     private String nombre;
 }

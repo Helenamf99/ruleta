@@ -55,7 +55,7 @@ public class JuegoController {
         for (Usuario u : listaUsuarios) {
             if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(email) && u.getPassword().equals(password)) {
 
-                // 🌟 BLINDADO: Si el valor en la BDD es null, lo convertimos de forma segura a 'false'
+                //Si el valor en la BBDD es null, lo convertimos de forma segura a 'false'
                 boolean esAdministrador = (u.getIsAdmin() != null) && u.getIsAdmin();
 
                 // Usamos un HashMap tradicional en lugar de Map.of para evitar errores si algo viene vacío
@@ -118,13 +118,12 @@ public class JuegoController {
     public ResponseEntity<?> solicitarRecuperacion(@RequestBody Map<String, String> datos) {
         String email = datos.get("email");
         try {
-            // El servicio se encarga de todo (Token + Envío Real vía Brevo)
             juegoService.generarTokenRecuperacion(email);
             return ResponseEntity.ok(Map.of("mensaje", "Si el correo electrónico ingresado forma parte de nuestros registros recibirás un enlace para recuperar tu contraseña."));
         } catch (RuntimeException e) {
             return ResponseEntity.ok(Map.of("mensaje", "Si el correo electrónico ingresado forma parte de nuestros registros recibirás un enlace para recuperar tu contraseña."));
         }
-    } // 🌟 CORREGIDO: Ahora cierra únicamente este método
+    }
 
     @PostMapping("/restablecer-password")
     public ResponseEntity<?> restablecerPassword(@RequestBody Map<String, String> datos) {
@@ -141,7 +140,7 @@ public class JuegoController {
 
     // ==========================================================================
     // 🛠️ ENDPOINTS DE ADMINISTRACIÓN (AÑADIR AL FINAL DEL CONTROLLER)
-    // ==========================================================================
+
 
     @DeleteMapping("/eliminar/usuarios/{id}")
     public ResponseEntity<?> eliminarUsuario(@PathVariable Integer id, @RequestHeader("Authorizated") String token) {
@@ -154,7 +153,7 @@ public class JuegoController {
             return ResponseEntity.badRequest().body(Map.of("mensaje", e.getMessage()));
         }
     }
-    // 📝 10. Modificar el nombre de un usuario
+    // Modificar el nombre de un usuario
     @PutMapping("/usuarios/modificar/{id}")
     public ResponseEntity<?> modificarNombreUsuario(@PathVariable Integer id, @RequestBody Map<String, String> datos) {
         try {

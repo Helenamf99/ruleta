@@ -20,7 +20,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nombre_usuario", unique = true, nullable = false) // Aseguramos el mapeo snake_case de tu BD
+    @Column(name = "nombre_usuario", unique = true, nullable = false)
     private String nombreUsuario;
 
     @Column(unique = true, nullable = false)
@@ -38,7 +38,7 @@ public class Usuario {
     @Column(name = "puntos_maximos")
     private Integer puntosMaximos;
 
-    // Añade las comillas invertidas ` ` dentro de las comillas dobles
+
     @Column(name = "is_admin")
     private Boolean isAdmin;
 
@@ -50,7 +50,7 @@ public class Usuario {
         this.isAdmin = isAdmin;
     }
 
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY) // MappedBy apunta a la variable 'usuario' de Partida
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Partida> partidas;
 

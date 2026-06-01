@@ -21,7 +21,7 @@ if (btnOpenRanking) {
     btnOpenRanking.addEventListener("click", (e) => {
         e.preventDefault();
         if (modalRanking) {
-            modalRanking.style.display = "flex"; // Cambiado a flex para mantener consistencia visual
+            modalRanking.style.display = "flex"; 
         }
         buscarTopJugadores();
     });
@@ -82,7 +82,7 @@ async function buscarTopJugadores() {
                 listaOL.appendChild(li);
             }
 
-            // Insertar en la lista decorativa del Main (abajo)
+            // Insertar en la lista decorativa del Main 
             if (listaDecorativa) {
                 const liDeco = document.createElement("li");
                 liDeco.innerHTML = `${indice + 1}. ${nombre} <span style="color:#00ff87; font-weight:bold;">${puntos} pts</span>`;
@@ -97,13 +97,12 @@ async function buscarTopJugadores() {
         if (listaDecorativa) listaDecorativa.innerHTML = itemError;
     }
 }
-// ==========================================================================
+
 document.addEventListener("DOMContentLoaded", () => {
     buscarTopJugadores();
 });
 
-// ==========================================================================
-// 2. MODAL DE AUTENTICACIÓN (LOGIN / REGISTRO) - CONECTADO A TU API LOCAL
+// para hacer el login y registro, conectado con la api 
 
 const API_BASE_URL = "https://limpness-stress-front.ngrok-free.dev";
 const API_LOGIN_URL = `${API_BASE_URL}/login`;       
@@ -212,8 +211,7 @@ function ocultarMensaje() {
 }
 
 
-// ==========================================================================
-// 3. ENTRADA Y SALIDA DE DATOS REALES CON TU BACKEND (FETCH)
+// Para la ENTRADA Y SALIDA DE DATOS que son reales CON el BACKEND
 
 async function manejarLogin(e) {
     e.preventDefault();
@@ -236,12 +234,11 @@ async function manejarLogin(e) {
         const datos = await respuesta.json();
 
         if (respuesta.ok) {
-            // 🌟 GUARDADO SÍNCRO: Con las claves unificadas que espera tu juego
+            
             localStorage.setItem('usuarioId', datos.id);
             localStorage.setItem('nombreUsuario', datos.username); 
             localStorage.setItem('isAdmin', datos.isAdmin);
 
-            // 🚀 DETECTOR DE ROL: Evaluamos si es Administrador o Jugador estándar
             if (datos.isAdmin === true || datos.isAdmin === "true") {
                 lanzarMensaje(`¡Bienvenido Administrador ${datos.username}! Accediendo al panel...`, 'exito');
                 
@@ -334,9 +331,7 @@ async function manejarSolicitudRecuperacion(e) {
     }
 }
 
-
-// ==========================================================================
-// 4. LÓGICA EXCLUSIVA PARA LA PÁGINA RESTABLECER.HTML
+// para restablecer la contraseña
 
 const formRestablecer = document.getElementById('form-restablecer');
 if (formRestablecer) {
