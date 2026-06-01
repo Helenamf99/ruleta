@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOLTA - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <h1 class="logo-neon">
+            <span>V</span>
+            <img src="imagenes/ruleta.png" alt="O" class="ruleta-icono">
+            <span>LTA</span>
+        </h1>
+        <p class="subtitle">Una aventura épica te espera</p>
+        <nav id="menu-juego">
+            <ul>
+                <li><a href="#" id="btn-abrir-modal" class="btn-jugar">Iniciar Juego</a></li>
+                <li><a href="#" class="btn-ranking" id="openRanking">Ver Ranking</a></li>
+                <div id="rankingModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+
+                        <section id="preview-ranking">
+                            <h3>Top 3 Jugadores</h3>
+                            <ol id="lista-ranking-real">
+                                <li>Cargando posiciones...</li>
+                            </ol>
+                        </section>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="imagenes/video.mp4" type="video/mp4">
+        </video>
+        <div class="main-content">
+            <section id="descripcion">
+                <h2>Sobre el Juego</h2>
+                <h3>¿Te atreves a domar el Rosco?</h3>
+                <p>Bienvenido al juego de preguntas donde la mente corre... y el azar manda. Esto no es el clásico juego
+                    de la A a la Z. Aquí te enfrentas al Rosco, pero tu destino lo decide una ruleta implacable.</p>
+                <p>Cada tirada elegirá tu próxima categoría, pero ¡cuidado!, la suerte es caprichosa. Dos de sus
+                    casillas esconden el poder de cambiarlo todo: un subidón de <strong class="segundosPos">+15
+                        segundos</strong> para
+                    respirar aliviado, o un hachazo de <strong class="segundosNeg">-15 segundos</strong> que hará arder
+                    tu cronómetro.</p>
+                <p>El tiempo vuela, las preguntas queman y la ruleta puede coronarte o mandarte a la lona. ¿Tienes los
+                    conocimientos y los nervios de acero suficientes?</p>
+                <div class="pasos-juego">
+                    <h3>Cómo jugar en 3 pasos:</h3>
+                    <ul>
+                        <li><strong class="pasos"> Gira la ruleta:</strong> Descubre tu categoría... o reza para que el
+                            comodín del
+                            tiempo esté de tu parte.</li>
+                        <li><strong class="pasos"> Domina el reloj:</strong> Responde rápido antes de que el cronómetro
+                            llegue a
+                            cero.</li>
+                        <li><strong class="pasos"> Conquista el Rosco:</strong> Asegura tus letras y demuestra quién
+                            manda aquí.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="preview-ranking">
+                <h3>Top 3 Jugadores</h3>
+                <ol>
+                    <li>PlayerOne 9999 pts</li>
+                    <li>ShadowNinja 8500 pts</li>
+                    <li>PixelArt 7200 pts</li>
+                </ol>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Desarrollado por:</h4>
+                <p>Patricia Bausan <a href="https://www.linkedin.com/in/patricia-bausan-g%C3%B3mez-7a95b63a0/"
+                        target="_blank" rel="noopener noreferrer"><img src="imagenes/linkedin.ico" width="18px"></a>
+                </p>
+                <p>Helena Macedo <a href="https://www.linkedin.com/in/helena-macedo-fuster-6b1913198/" target="_blank"
+                        rel="noopener noreferrer"><img src="imagenes/linkedin.ico" width="18px"></a></p>
+                <p>Daniel Ivina <a href="https://www.linkedin.com/in/daniel-ivina-botoko-486a362ab/" target="_blank"
+                        rel="noopener noreferrer"><img src="imagenes/linkedin.ico" width="18px"></a></p>
+                <p>Emanuel Martin <a href="https://www.linkedin.com/in/emamartin19/" target="_blank"
+                        rel="noopener noreferrer"><img src="imagenes/linkedin.ico" width="18px"></a> </p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Tecnologías:</h4>
+                <p>HTML5, CSS3, JavaScript</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 . Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="scripts.js" defer></script>
+    <div id="modal-auth" class="modal hidden    ">
+        <div class="modal-content">
+
+            <span class="btn-cerrar">&times;</span>
+
+
+            <div id="auth-container">
+
+            </div>
+
+            <div id="auth-mensaje" class="mensaje hidden"></div>
+        </div>
+    </div>
+     <audio id="musicaIntro" src="/frontend/audio/intro.wav" loop></audio> 
+</body>
+
+</html>
